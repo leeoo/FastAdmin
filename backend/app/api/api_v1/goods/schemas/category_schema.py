@@ -21,7 +21,8 @@ class CategoryCreate(BaseModel):
     name: str
     front_desc: str
     sort_order: int
-    icon_url: AnyHttpUrl
+    # icon_url: AnyHttpUrl
+    icon_url: str
     enabled: int = 1
 
 

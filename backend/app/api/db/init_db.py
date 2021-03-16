@@ -1,10 +1,12 @@
 from sqlalchemy.orm import Session
 
-from api.api_v1.auth.schemas import user as user_schemas, role as role_schemas
+from api.api_v1.auth.schemas import user_schema as user_schemas, role_schema as role_schemas
 
 from api.api_v1.auth.crud import curd_user, curd_role
 from core.config import settings
 
+from api.db.base_class import Base
+from api.db.session import engine
 
 # make sure all SQL Alchemy models are imported (db.base) before initializing DB
 # otherwise, SQL Alchemy might fail to initialize relationships properly
@@ -15,7 +17,7 @@ def init_db(db: Session) -> None:
     # Tables should be created with Alembic migrations
     # But if you don't want to use migrations, create
     # the tables un-commenting the next line
-    # Base.metadata.create_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
     for temp_role in settings.DEFAULT_ROLE:
         role = curd_role.query_role(db, role_id=temp_role.get("role_id"))
         if not role:

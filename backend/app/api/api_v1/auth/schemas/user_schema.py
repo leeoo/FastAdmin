@@ -44,7 +44,8 @@ class UserCreate(UserBase):
     email: EmailStr
     password: str
     role_id: int
-    avatar: AnyHttpUrl
+    # avatar: AnyHttpUrl
+    avatar: str
 
 
 # Properties to receive via API on update
@@ -68,7 +69,8 @@ class UserInfo(BaseModel):
     role_id: int
     role: str
     nickname: str
-    avatar: AnyHttpUrl
+    # avatar: AnyHttpUrl
+    avatar: str
 
 
 class RespUserInfo(RespBase):

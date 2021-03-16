@@ -60,7 +60,8 @@ class Settings(BaseSettings):
     FIRST_MALL: EmailStr = "wg_python@163.com"
     FIRST_SUPERUSER_PASSWORD: str = "admin12345"
     FIRST_ROLE: int = 999  # 超级管理员
-    FIRST_AVATAR: AnyHttpUrl = "https://avatar-static.segmentfault.com/106/603/1066030767-5d396cc440024_huge256"
+    # FIRST_AVATAR: AnyHttpUrl = "https://avatar-static.segmentfault.com/106/603/1066030767-5d396cc440024_huge256"
+    FIRST_AVATAR: str = "https://avatar-static.segmentfault.com/106/603/1066030767-5d396cc440024_huge256"
 
     class Config:
         case_sensitive = True

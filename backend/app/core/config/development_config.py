@@ -46,17 +46,19 @@ class Settings(BaseSettings):
 
     # mysql 配置
     MYSQL_USERNAME: str = 'root'
-    MYSQL_PASSWORD: str = "Admin12345-"
-    MYSQL_HOST: Union[AnyHttpUrl, IPvAnyAddress] = "172.16.137.129"
+    MYSQL_PASSWORD: str = "Root@123"
+    MYSQL_HOST: Union[AnyHttpUrl, IPvAnyAddress] = "127.0.0.1"
     MYSQL_DATABASE: str = 'FastAdmin'
 
     # mysql地址
-    SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{MYSQL_USERNAME}:{MYSQL_PASSWORD}@" \
+    # SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{MYSQL_USERNAME}:{MYSQL_PASSWORD}@" \
+    #                           f"{MYSQL_HOST}/{MYSQL_DATABASE}?charset=utf8mb4"
+    SQLALCHEMY_DATABASE_URL = f"mysql+mysqlconnector://{MYSQL_USERNAME}:{MYSQL_PASSWORD}@" \
                               f"{MYSQL_HOST}/{MYSQL_DATABASE}?charset=utf8mb4"
 
     # redis配置
-    REDIS_HOST: str = "172.16.137.129"
-    REDIS_PASSWORD: str = "root12345"
+    REDIS_HOST: str = "127.0.0.1"
+    REDIS_PASSWORD: str = ""
     REDIS_DB: int = 0
     REDIS_PORT: int = 6379
     REDIS_URL: str = f"redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}?encoding=utf-8"
@@ -73,7 +75,8 @@ class Settings(BaseSettings):
     FIRST_MALL: EmailStr = "wg_python@163.com"
     FIRST_SUPERUSER_PASSWORD: str = "admin12345"
     FIRST_ROLE: int = 999  # 超级管理员
-    FIRST_AVATAR: AnyHttpUrl = "https://avatar-static.segmentfault.com/106/603/1066030767-5d396cc440024_huge256"
+    # FIRST_AVATAR: AnyHttpUrl = "https://avatar-static.segmentfault.com/106/603/1066030767-5d396cc440024_huge256"
+    FIRST_AVATAR: str = "https://avatar-static.segmentfault.com/106/603/1066030767-5d396cc440024_huge256"
 
     class Config:
         case_sensitive = True
