@@ -13,6 +13,8 @@
     name: 'GoodsListView',
     data() {
       return {}
+    },
+    created() {
     }
   }
 </script>

@@ -62,3 +62,12 @@ export function searchCategoryList(data) {
     data
   )
 }
+
+// 查询分类列表
+export function listView(data) {
+  return request(
+    '/goods/query/category/list',
+    'get',
+    data
+  )
+}

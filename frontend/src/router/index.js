@@ -68,6 +68,12 @@ export const constantRoutes = [
         meta: { title: '商品列表', icon: 'el-icon-tickets' }
       },
       {
+        path: 'category',
+        component: () => import('@/views/goods/category/index'), // Parent router-view
+        name: 'GoodsCategory',
+        meta: { title: '商品分类', icon: 'el-icon-tickets' }
+      },
+      {
         path: 'attribute',
         component: () => import('@/views/goods/attribute/index'), // Parent router-view
         name: 'Attribute',
