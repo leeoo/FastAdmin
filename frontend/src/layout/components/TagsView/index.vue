@@ -1,6 +1,7 @@
 <template>
   <div id="tags-view-container" class="tags-view-container">
     <scroll-pane ref="scrollPane" class="tags-view-wrapper">
+      <!-- {{visitedViews}} -->
       <router-link
         v-for="tag in visitedViews"
         ref="tag"
@@ -14,7 +15,7 @@
       >
         {{ tag.title }}
         <span
-          v-if="!isAffix(tag)"
+          v-if="!isAffix(tag) && visitedViews.length >1"
           class="el-icon-close"
           @click.prevent.stop="closeSelectedTag(tag)"
         />
