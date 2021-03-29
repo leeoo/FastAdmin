@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">FastAdmin后台登录</h3>
+        <h3 class="title">FastAdmin</h3>
       </div>
 
       <el-form-item prop="username">
@@ -41,11 +41,11 @@
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
 
       <div class="tips">
-        <span style="margin-right:20px;">username: wg_python@163.com</span>
-        <span> password: admin12345</span>
+        <span style="margin-right:20px;">测试账号: admin@163.com</span>
+        <span> 密码: admin12345</span>
       </div>
 
     </el-form>
@@ -60,21 +60,21 @@ export default {
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validEmail(value)) {
-        callback(new Error('Please enter the correct account'))
+        callback(new Error('请输入正确的账号'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('密码长度不能小于6位'))
       } else {
         callback()
       }
     }
     return {
       loginForm: {
-        username: 'wg_python@163.com',
+        username: 'admin@163.com',
         password: 'admin12345'
       },
       loginRules: {
