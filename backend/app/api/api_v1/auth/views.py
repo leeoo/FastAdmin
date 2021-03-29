@@ -46,9 +46,11 @@ async def login_access_token(
     user = curd_user.authenticate(db, email=user_info.username, password=user_info.password)
     if not user:
         logger.info(f"用户邮箱认证错误: email{user_info.username} password:{user_info.password}")
-        return response_code.resp_500(message="用户名或者密码错误")
+        # return response_code.resp_500(message="用户名或者密码错误")
+        return response_code.resp_with_custom_message(message="用户名或者密码错误")
     elif not curd_user.is_active(user):
-        return response_code.resp_500(message="用户邮箱未激活")
+        # return response_code.resp_500(message="用户邮箱未激活")
+        return response_code.resp_with_custom_message(message="用户邮箱未激活")
 
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
 

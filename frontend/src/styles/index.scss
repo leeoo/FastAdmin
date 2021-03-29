@@ -63,3 +63,20 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+.el-pagination{
+  text-align:right;
+}
+.common-page{
+   padding: 30px;
+}
+.common-table{
+  margin-bottom:20px;
+}
+.common-table-btn {
+  .el-button--text{
+    padding: 0;
+  }
+}
+.mr10{
+  margin-right:10px;
+}

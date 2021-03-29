@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Vue 后台管理',
+  title: 'FastAdmin',
 
   /**
    * @type {boolean} true | false

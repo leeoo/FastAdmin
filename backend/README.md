@@ -109,7 +109,7 @@ python initial_data.py
 
 
 ```shell
-username: wg_python@163.com
+username: admin@163.com
 password: admin12345
 ```
 

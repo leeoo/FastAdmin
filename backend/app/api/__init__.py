@@ -23,6 +23,7 @@ from api.api_v1.api import api_v1_router
 from api.common.logger import logger
 from api.utils.custom_exc import PostParamsError, UserTokenError, UserNotFound
 from api.utils import response_code
+from jose import jwt
 
 
 def create_app():
@@ -194,6 +195,18 @@ def register_exception(app: FastAPI):
         """
         logger.error(f"全局异常\n{request.method}URL:{request.url}\nHeaders:{request.headers}\n{traceback.format_exc()}")
         return response_code.resp_500(message="服务器内部错误")
+
+    # 捕获认证Token已过期异常，返回对应的自定义状态码给前端，前端页面可根据该状态码自动退出；
+    @app.exception_handler(jwt.ExpiredSignatureError)
+    async def expired_signature_error_handler(request: Request, exc: Exception):
+        """
+        认证Token已过期异常
+        :param request:
+        :param exc:
+        :return:
+        """
+        logger.warning(f"认证Token已过期\n{request.method} URL:{request.url}\nHeaders:{request.headers}")
+        return response_code.resp_401(message="认证失败：Token已过期")
 
 
 def register_middleware(app: FastAPI):

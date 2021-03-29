@@ -35,12 +35,17 @@ def check_jwt_token(
     """
 
     try:
+        if token is None or len(token.strip()) == 0:
+            raise custom_exc.UserTokenError(err_desc="访问Token为空")
         payload = jwt.decode(
             token,
             settings.SECRET_KEY, algorithms=settings.JWT_ALGORITHM
         )
         return token_schema.TokenPayload(**payload)
-    except (jwt.JWTError, jwt.ExpiredSignatureError, ValidationError):
+    except jwt.ExpiredSignatureError as ese:  # 认证Token已过期
+        # raise custom_exc.UserTokenError(err_desc="认证Token已过期")
+        raise ese
+    except (jwt.JWTError, ValidationError) as e:
         raise custom_exc.UserTokenError(err_desc="access token fail")
 
 

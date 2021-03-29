@@ -54,6 +54,7 @@ export const constantRoutes = [
       meta: { title: '首页', icon: 'el-icon-s-home' }
     }]
   },
+  /*
   {
     path: '/goods',
     component: Layout,
@@ -148,6 +149,28 @@ export const constantRoutes = [
         component: () => import('@/views/shop/notice/index'), // Parent router-view
         name: 'Notice',
         meta: { title: '公告', icon: 'el-icon-message-solid' }
+      }
+    ]
+  },
+*/
+  {
+    path: '/table',
+    component: Layout,
+    name: 'table',
+    meta: { title: '数据源', icon: 'el-icon-office-building' },
+    redirect: '/table/table-preview',
+    children: [
+      {
+        path: 'table-preview',
+        component: () => import('@/views/table/table-preview'), // Parent router-view
+        name: 'table_preview',
+        meta: { title: '数据浏览', icon: 'el-icon-reading' }
+      },
+      {
+        path: 'datasource',
+        component: () => import('@/views/table/datasource'), // Parent router-view
+        name: 'datasource',
+        meta: { title: '数据源管理', icon: 'el-icon-s-management' }
       }
     ]
   },

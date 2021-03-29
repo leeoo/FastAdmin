@@ -27,8 +27,9 @@ class Settings(BaseSettings):
 
     # jwt加密算法
     JWT_ALGORITHM: str = "HS256"
-    # jwt token过期时间 60 minutes * 24 hours * 8 days = 8 days
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
+    # jwt token过期时间 60 minutes * 24 hours * 7 days = 7 days
+    # ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
 
     # 根路径
     BASE_DIR: str = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -71,8 +72,8 @@ class Settings(BaseSettings):
     ]
 
     # 默认生成用户数据
-    FIRST_SUPERUSER: str = "王小右"
-    FIRST_MALL: EmailStr = "wg_python@163.com"
+    FIRST_SUPERUSER: str = "admin"
+    FIRST_MALL: EmailStr = "admin@163.com"
     FIRST_SUPERUSER_PASSWORD: str = "admin12345"
     FIRST_ROLE: int = 999  # 超级管理员
     # FIRST_AVATAR: AnyHttpUrl = "https://avatar-static.segmentfault.com/106/603/1066030767-5d396cc440024_huge256"
