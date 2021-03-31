@@ -1,10 +1,14 @@
 <template>
   <div class="common-page">
-            </el-switch>
     <el-form :inline="true" :model="searchForm" class="demo-form-inline" @submit.native.prevent>
       <el-form-item label="数据库信息">
-        <el-input v-model="searchForm.keyword" style="width:250px" placeholder="请输入关键字查询" clearable
-        @keyup.enter.native="getList()" @clear="getList()" />
+        <el-input
+         v-model="searchForm.keyword"
+         style="width:250px"
+         placeholder="请输入关键字查询"
+         clearable
+         @keyup.enter.native="getList()"
+         @clear="getList()" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="getList">查询</el-button>
@@ -141,10 +145,10 @@
 <script>
   import { getList, add, edit, del, editStatus } from '@/api/datasource'
   export default {
-    name: 'myTable',
+    name: 'Datasource',
     data() {
       return {
-        test:true,
+        test: true,
         visibleDialog: false,
         loading: false,
         total: 0, // 分页总数
@@ -152,16 +156,16 @@
         form: {
           connection_name: '',
           database_type: '',
-          database_version: "",
-          host: "",
-          port: "",
-          database_name: "",
-          charset: "",
-          username: "",
-          password: "",
-          connection_url: "",
+          database_version: '',
+          host: '',
+          port: '',
+          database_name: '',
+          charset: '',
+          username: '',
+          password: '',
+          connection_url: '',
           enabled: 1,
-          remark: ""
+          remark: ''
         },
         rules: {
           connection_name: [
@@ -198,7 +202,7 @@
             { required: true, message: '请选择是否启用', trigger: 'change' }
           ]
         },
-        columns:[
+        columns: [
           {
             prop: 'connection_name',
             label: '连接名称',
@@ -247,17 +251,14 @@
           {
             prop: 'enabled',
             label: '是否启用',
-            minWidth: 100,
-            // formatter: (row, column, cellValue, index) => {
-            //   return cellValue === 1 ? '启用': '停用'
-            // }
+            minWidth: 100
           },
           {
             prop: 'valid',
             label: '是否有效',
             minWidth: 100,
             formatter: (row, column, cellValue, index) => {
-              return cellValue === 1 ? '有效': '无效'
+              return cellValue === 1 ? '有效' : '无效'
             }
           },
           // {
@@ -289,7 +290,7 @@
             prop: 'update_at',
             label: '更新时间',
             minWidth: 160
-          },
+          }
         ],
         searchForm: {
           keyword: '',
@@ -298,60 +299,59 @@
         }
       }
     },
-    mounted(){
+    mounted() {
       this.getList()
     },
-    methods:{
+    methods: {
       // 编辑
-      onEdit (data) {
+      onEdit(data) {
         this.visibleDialog = true
-        this.form = {...data}
+        this.form = { ...data }
       },
       // 删除
-      onDel (id) {
+      onDel(id) {
          this.$confirm('此操作将删除该数据, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          let params = {
+          const params = {
             ids: [id]
           }
           del(params).then(res => {
-            if (res.code===200){
-              this.$message.success('删除成功');
+            if (res.code === 200) {
+              this.$message.success('删除成功')
               this.getList()
             }
           })
         }).catch(() => {
-        });
+        })
       },
       // 状态
-      onEditStatus (id, enabled) {
-        let msg = enabled ?'启用' : '停用'
+      onEditStatus(id, enabled) {
+        const msg = enabled ? '启用' : '停用'
         enabled = enabled ? 1 : 0
         this.$confirm(`此操作将${msg}该数据, 是否继续?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          editStatus({ids: [id], enabled}).then(res => {
-            if (res.code===200){
-              this.$message.success(msg + '成功');
+          editStatus({ ids: [id], enabled }).then(res => {
+            if (res.code === 200) {
+              this.$message.success(msg + '成功')
               this.getList()
             }
           })
         }).catch(() => {
-        });
-
+        })
       },
       // 提交
-      onSubmit(){
+      onSubmit() {
         this.$refs['form'].validate((valid) => {
           if (valid) {
             if (this.form.id) {
               edit(this.form).then(res => {
-                if (res.code===200){
+                if (res.code === 200) {
                   this.visibleDialog = false
                   this.getList()
                 }
@@ -359,7 +359,7 @@
               })
             } else {
               add(this.form).then(res => {
-                if (res.code===200){
+                if (res.code === 200) {
                   this.visibleDialog = false
                   this.getList()
                 }
@@ -367,45 +367,45 @@
               })
             }
           } else {
-            console.log('error submit!!');
-            return false;
+            console.log('error submit!!')
+            return false
           }
-        });
+        })
       },
       // 关闭
-      onClose () {
+      onClose() {
         this.form = {
           connection_name: '',
           database_type: '',
-          database_version: "",
-          host: "",
-          port: "",
-          database_name: "",
-          charset: "",
-          username: "",
-          password: "",
-          connection_url: "",
+          database_version: '',
+          host: '',
+          port: '',
+          database_name: '',
+          charset: '',
+          username: '',
+          password: '',
+          connection_url: '',
           enabled: 1,
-          remark: ""
-        },
+          remark: ''
+        }
         this.$refs.form.resetFields()
       },
       // 切换页面大小
-      onChangePageSize(page_size){
-        this.searchForm.page_size = page
+      onChangePageSize(page_size) {
+        this.searchForm.page_size = page_size
         this.getList()
       },
       // 切换页面
-      onChangePage(page){
+      onChangePage(page) {
         this.searchForm.page = page
         this.getList()
       },
       // 获取表数据
-      getList(){
+      getList() {
         this.dataList = []
         this.loading = true
         getList(this.searchForm).then(res => {
-          if (res.code===200){
+          if (res.code === 200) {
             this.dataList = res.data.items
             this.total = res.data.total
           }
@@ -413,7 +413,7 @@
         })
       },
       // 新增
-      onAdd () {
+      onAdd() {
         this.visibleDialog = true
       }
     }
