@@ -20,7 +20,7 @@ from pydantic import AnyHttpUrl, BaseSettings, IPvAnyAddress, EmailStr
 class Settings(BaseSettings):
     DEBUG: bool = False
 
-    API_V1_STR: str = "/api/mall/v1"
+    API_V1_STR: str = "/api/v1"
     SECRET_KEY: str = os.getenv("SECRET_KEY")
 
     # jwt加密算法
@@ -33,7 +33,7 @@ class Settings(BaseSettings):
 
     # 项目信息
     PROJECT_NAME: str = "FastAdmin"
-    DESCRIPTION: str = "更多信息查看 https://www.charmcode.cn/"
+    DESCRIPTION: str = "后端API列表"
     SERVER_NAME: str = "API_V1"
     SERVER_HOST: AnyHttpUrl = "http://domain.com"
 
@@ -44,10 +44,13 @@ class Settings(BaseSettings):
     MYSQL_USERNAME: str = os.getenv("MYSQL_USER", "root")
     MYSQL_PASSWORD: str = os.getenv("MYSQL_PASSWORD", "admin")
     MYSQL_HOST: Union[AnyHttpUrl, IPvAnyAddress] = os.getenv("MYSQL_HOST", "127.0.0.1")
-    MYSQL_DATABASE: str = 'FastAdmin'
+    MYSQL_DATABASE: str = 'fast_admin'
 
     SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{MYSQL_USERNAME}:{MYSQL_PASSWORD}@" \
                               f"{MYSQL_HOST}/{MYSQL_DATABASE}?charset=utf8mb4"
+
+    # Loguru配置
+    LOG_LEVEL: str = 'INFO'
 
     # 基本角色权限 个人没做过权限设置 但是也看过一些开源项目就这样设计吧
     DEFAULT_ROLE: List[dict] = [

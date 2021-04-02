@@ -21,7 +21,7 @@ class Settings(BaseSettings):
 
     DEBUG: bool = True
     #
-    API_V1_STR: str = "/api/mall/v1"
+    API_V1_STR: str = "/api/v1"
     # SECRET_KEY 记得保密生产环境 不要直接写在代码里面
     SECRET_KEY: str = "(-ASp+_)-Ulhw0848hnvVG-iqKyJSD&*&^-H3C9mqEqSl8KN-YRzRE"
 
@@ -36,7 +36,7 @@ class Settings(BaseSettings):
 
     # 项目信息
     PROJECT_NAME: str = "FastAdmin"
-    DESCRIPTION: str = "更多信息查看 https://www.charmcode.cn/"
+    DESCRIPTION: str = "后端API列表"
     SERVER_NAME: str = "API_V1"
     SERVER_HOST: AnyHttpUrl = "http://127.0.0.1:8020"
     # BACKEND_CORS_ORIGINS is a JSON-formatted list of origins
@@ -49,7 +49,7 @@ class Settings(BaseSettings):
     MYSQL_USERNAME: str = 'root'
     MYSQL_PASSWORD: str = "Root@123"
     MYSQL_HOST: Union[AnyHttpUrl, IPvAnyAddress] = "127.0.0.1"
-    MYSQL_DATABASE: str = 'FastAdmin'
+    MYSQL_DATABASE: str = 'fast_admin'
 
     # mysql地址
     # SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{MYSQL_USERNAME}:{MYSQL_PASSWORD}@" \
@@ -63,6 +63,9 @@ class Settings(BaseSettings):
     REDIS_DB: int = 0
     REDIS_PORT: int = 6379
     REDIS_URL: str = f"redis://:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}?encoding=utf-8"
+
+    # Loguru配置
+    LOG_LEVEL: str = 'INFO'
 
     # 基本角色权限 个人没做过权限设置 但是也看过一些开源项目就这样设计吧
     DEFAULT_ROLE: List[dict] = [

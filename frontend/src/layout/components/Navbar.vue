@@ -7,7 +7,10 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
+          <!--
           <img :src="avatar" class="user-avatar">
+          -->
+          <img src="@/assets/404_images/avatar-404.png" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
@@ -16,11 +19,13 @@
               首页
             </el-dropdown-item>
           </router-link>
+          <!--
           <router-link to="/profile">
             <el-dropdown-item>
               我的主页
             </el-dropdown-item>
           </router-link>
+          -->
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">退出</span>
           </el-dropdown-item>

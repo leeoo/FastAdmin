@@ -47,7 +47,7 @@ async def add_database_connection_info(
         db: Session = Depends(deps.get_db),
         token_data: Union[str, Any] = Depends(deps.check_jwt_token),
 ):
-    logger.info(f"添加数据库连接信息->用户id:{token_data.sub}数据库连接信息名:{entity.connection_name}")
+    logger.info(f"添加数据库连接信息->用户id:{token_data.sub}，数据库连接信息名:{entity.connection_name}")
     curd_database_connection_info.create(db=db, obj_in=entity)
     return response_code.resp_200(message="数据库连接信息添加成功")
 
@@ -68,7 +68,7 @@ async def query_database_connection_info_list(
 async def query_database_connection_info(
         db: Session = Depends(deps.get_db),
         id: int = Query(..., title="查询当前数据库连接信息"),
-        # token_data: Union[str, Any] = Depends(deps.check_jwt_token)
+        token_data: Union[str, Any] = Depends(deps.check_jwt_token)
 ):
     # logger.info(f"查询数据库连接信息->用户id:{token_data.sub}数据库连接信息:{id}")
     response_result = curd_database_connection_info.query_obj(db, cate_id=id)
@@ -81,7 +81,7 @@ async def modify_database_connection_info(
         db: Session = Depends(deps.get_db),
         token_data: Union[str, Any] = Depends(deps.check_jwt_token),
 ):
-    logger.info(f"修改数据库连接信息->用户id:{token_data.sub}数据库连接信息id:{cate_info.id}")
+    logger.info(f"修改数据库连接信息->用户id:{token_data.sub}，数据库连接信息id:{cate_info.id}")
     curd_database_connection_info.update_cate(db=db, obj_in=cate_info)
 
     return response_code.resp_200(message="修改成功")
@@ -93,7 +93,7 @@ async def delete_database_connection_info(
         db: Session = Depends(deps.get_db),
         token_data: Union[str, Any] = Depends(deps.check_jwt_token),
 ):
-    logger.info(f"修改数据库连接信息->用户id:{token_data.sub}数据库连接信息id:{cate_ids.ids}")
+    logger.info(f"删除数据库连接信息->用户id:{token_data.sub}，数据库连接信息id:{cate_ids.ids}")
     for cate_id in cate_ids.ids:
         # curd_database_connection_info.remove(db, id=cate_id)
         curd_database_connection_info.delete(db, id=cate_id)
@@ -106,7 +106,7 @@ async def enabled_database_connection_info(
         db: Session = Depends(deps.get_db),
         token_data: Union[str, Any] = Depends(deps.check_jwt_token),
 ):
-    logger.info(f"开启数据库连接信息操作->用户id:{token_data.sub}数据库连接信息id:{cate_info.ids}操作:{cate_info.enabled}")
+    logger.info(f"启用数据库连接信息操作->用户id:{token_data.sub}，数据库连接信息id:{cate_info.ids}操作:{cate_info.enabled}")
     for cate_id in cate_info.ids:
         curd_database_connection_info.update_enabled(db, id=cate_id, enabled=cate_info.enabled)
     return response_code.resp_200(message="操作成功")
@@ -118,7 +118,7 @@ async def search_database_connection_info(
         db: Session = Depends(deps.get_db),
         token_data: Union[str, Any] = Depends(deps.check_jwt_token),
 ):
-    logger.info(f"搜索数据库连接信息操作->用户id:{token_data.sub}搜索{cate_info.keyword}:{cate_info.keyword}"
+    logger.info(f"搜索数据库连接信息操作->用户id:{token_data.sub}，搜索{cate_info.keyword}:{cate_info.keyword}"
                 f"页码:{cate_info.page}长度{cate_info.page_size}")
     response_result = curd_database_connection_info.search_field(db, cate_info=cate_info)
     return response_code.resp_200(data=response_result)
@@ -263,10 +263,10 @@ async def query_mysql_table_list(
 async def query_table_list(
     db_connection_id: int = 1,
     db: Session = Depends(deps.get_db),
-    # token_data: Union[str, Any] = Depends(deps.check_jwt_token),
+    token_data: Union[str, Any] = Depends(deps.check_jwt_token),
 ):
     """
-    TODO 直连指定的数据库连接信息对应的实例，根据库名列出其表清单，若未选定，则提示；
+    直连指定的数据库连接信息对应的实例，根据库名列出其表清单，若未选定，则提示；
     """
     logger.info(f'搜索表清单操作->数据库连接id: {db_connection_id}')
 
@@ -655,7 +655,7 @@ async def do_query_table_data_mysql(db, db_connection_info_dict, page_no, page_s
                 data_items.append(data_item)
 
         response_result = {"data": {"items": data_items}, "total": total}
-        logger.info(f'response_result->{response_result}')
+        logger.debug(f'response_result->{response_result}')
         return response_result
         # return response_code.resp_200(data=response_result)
     # except ArgumentError as ae:
